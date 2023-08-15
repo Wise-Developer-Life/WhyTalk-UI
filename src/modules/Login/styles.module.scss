@@ -1,0 +1,36 @@
+@use '../../global' as global;
+
+%fonts-setting {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.login-page-container {
+  @include global.page-flex-container;
+}
+
+.login-widget-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.footer {
+  @media (max-width: 360px) {
+    /* On screens that are 900px or less */
+    display: none;
+  }
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(33, 33, 33, 0.4);
+
+  padding: 0.5em;
+  font-size: 12px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

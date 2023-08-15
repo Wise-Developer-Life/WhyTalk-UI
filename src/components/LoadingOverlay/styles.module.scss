@@ -1,0 +1,19 @@
+.spinner {
+  position: absolute !important;
+  z-index: 2000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  circle:first-child {
+    stroke-width: 2;
+  }
+  circle:nth-child(2) {
+    stroke-width: 2;
+  }
+}
+
+.modalBody {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}

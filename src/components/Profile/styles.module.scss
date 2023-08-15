@@ -1,0 +1,49 @@
+%icon-shared {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.header-icon-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 1em;
+    &:hover {
+      cursor: pointer;
+    }
+    .icon {
+      @extend %icon-shared;
+    }
+  }
+}
+
+.header-icon-layout-disabled {
+  &:hover {
+    cursor: not-allowed !important;
+  }
+}
+
+.icon-btn {
+  height: 30px;
+  //border: 1px solid gray;
+  border: none;
+  background-color: transparent;
+  padding: 0.3em 0.05em;
+  //border-radius: 5px;
+  &:hover:not(:disabled) {
+    cursor: pointer;
+    color: grey;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
