@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types'
 import { useReducer, useState } from 'react'
-import { apiDataReducer, getInitialState } from '../../reducers/index.js'
+import {
+  apiDataReducer,
+  DATA_STATE,
+  getInitialState,
+} from '../../reducers/index.js'
 import { GlobalDataContext } from '../contextStores.js'
 import { LOGIN_STATE } from '../const.js'
 import { TOKEN_NAME } from '../../const.js'
@@ -26,6 +30,11 @@ const GlobalDataProvider = props => {
     getInitialState({})
   )
 
+  const cleanupGlobalStates = () => {
+    setLoginState(LOGIN_STATE.init)
+    dispatchUserProfile({ type: DATA_STATE.init })
+  }
+
   return (
     <GlobalDataContext.Provider
       value={{
@@ -33,6 +42,7 @@ const GlobalDataProvider = props => {
         setLoginState,
         userProfile,
         dispatchUserProfile,
+        cleanupGlobalStates,
       }}
     >
       {children}

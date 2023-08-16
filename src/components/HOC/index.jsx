@@ -27,4 +27,15 @@ const AddPropsWrapper = (WrappedComponent, addedProps = {}) => {
   }
 }
 
-export { LayoutWrapper, AddPropsWrapper }
+const MiddlewareHOC =
+  (WrappingComponent, wrapperProps) =>
+  // eslint-disable-next-line react/display-name
+  (ChildComponent, childProps = {}) => {
+    return (
+      <WrappingComponent {...wrapperProps}>
+        <ChildComponent {...childProps} />
+      </WrappingComponent>
+    )
+  }
+
+export { LayoutWrapper, AddPropsWrapper, MiddlewareHOC }

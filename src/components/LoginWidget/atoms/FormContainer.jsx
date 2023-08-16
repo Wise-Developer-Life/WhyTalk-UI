@@ -68,7 +68,7 @@ const FormContainer = props => {
           setLoginState('login')
 
           navigate({
-            pathname: '/',
+            pathname: '/**ready-to-login',
             search: window.location.search,
           })
           break

@@ -22,6 +22,8 @@ const AccountField = props => {
     ...otherProps,
   })
 
+  console.log('---errors', errors)
+
   switch (mode) {
     case FIELD_MODE.static:
       return (
