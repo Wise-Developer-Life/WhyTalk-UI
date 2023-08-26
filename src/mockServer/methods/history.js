@@ -19,7 +19,7 @@ export function genHttpMethods() {
       let people = ['viola', 'ellen']
       obj['message_id'] = faker.string.uuid()
       obj['sent_to_id'] = people[randomNum]
-      obj['sent_from_id'] = people[randomNum === 1? 0: 1]
+      obj['sent_from_id'] = people[randomNum === 1 ? 0 : 1]
       obj['content'] = faker.lorem.paragraph({ min: 1, max: 3 })
       obj['timestamp'] = faker.date.between({
         from: '2023-08-01T00:00:00.000Z',

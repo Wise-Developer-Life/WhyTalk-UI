@@ -1,23 +1,28 @@
 %comment-shared {
-  min-height: 50px;
+  min-height: 36px;
   width: 100%;
-  margin: 5px 0;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
 }
 
 .comment-other {
   @extend %comment-shared;
-  float: left;
-  text-align: left;
+  //float: left;
+  //text-align: left;
+  justify-content: flex-start;
 }
 
 .comment-me {
+  // float prop will conflict with virtuoso
   @extend %comment-shared;
-  float: right;
-  text-align: right;
+  //float: right;
+  //text-align: right;
+  justify-content: flex-end;
 }
 
 .bubble {
-  --font-1: "Roboto", sans-serif;
+  --font-1: 'Roboto', sans-serif;
   display: inline-block;
   padding: 8px 12px;
   border-radius: 8px;
@@ -25,11 +30,11 @@
   font-family: var(--font-1);
   max-width: 55%;
   position: relative;
-  margin: 0 15px;
+  margin: 0 30px;
 }
 
 .comment-other .bubble {
-  --color-1: rgba(146,13,23,0.3);
+  --color-1: rgba(146, 13, 23, 0.3);
   background-color: var(--color-1);
   border-top-left-radius: 0;
 }
@@ -56,11 +61,12 @@
 }
 
 .comment-me .bubble:after {
+  //border: 1px dashed red;
   content: '';
   position: absolute;
+  background: transparent;
   top: 0;
   right: -30px;
-  background: transparent;
   height: 0;
   width: 0;
   border-right: 15px solid transparent;
