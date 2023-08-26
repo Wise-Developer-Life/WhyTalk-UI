@@ -13,10 +13,11 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 80px 300px auto;
-  grid-template-rows: 60px auto;
+  grid-template-rows: 60px auto 60px;
   grid-template-areas:
     'header header header'
-    'nav main dialog';
+    'nav main dialog'
+    'nav main message-input';
 }
 
 .grid-item-header {
@@ -39,5 +40,18 @@
 
 .grid-item-dialog {
   grid-area: dialog;
+  border: 1px dashed;
+  overflow: hidden;
+
+  .message-container {
+    height: 100%; /* 限制滚动区域的高度 */
+    width: 100%;
+    overflow: auto; /* 添加滚动 */
+    background-color: hsla(10%, 100%, 30%, 0.3);
+  }
+}
+
+.grid-item-input {
+  grid-area: message-input;
   border: 1px dashed;
 }

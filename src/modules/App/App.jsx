@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.module.scss'
 import styles from './App.module.scss'
 import Profile from '../../components/Profile/index.jsx'
+import ChatMessage from './atoms/ChatMessage.jsx'
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
       </div>
       <div className={styles['grid-item-nav']}>nav</div>
       <div className={styles['grid-item-main']}>main</div>
-      <div className={styles['grid-item-dialog']}>dialog</div>
+      <div className={styles['grid-item-dialog']}>
+        <ChatMessage />
+      </div>
+      <div className={styles['grid-item-input']}>message input</div>
     </section>
   )
 }
