@@ -4,7 +4,7 @@ import AccountField from './fields/AccountField.jsx'
 import TextField from './fields/TextField.jsx'
 import SingleSelectField from './fields/SingleSelectField.jsx'
 import TextareaField from './fields/TextareaField.jsx'
-import { AddPropsWrapper } from '../HOC/index.jsx'
+import { AddPropsHOC } from '../HOC/index.jsx'
 
 const useFieldInput = props => {
   const { type, mode } = props
@@ -12,15 +12,15 @@ const useFieldInput = props => {
   return useMemo(() => {
     switch (type) {
       case 'password':
-        return AddPropsWrapper(PasswordField, { mode: mode || 'default' })
+        return AddPropsHOC(PasswordField, { mode: mode || 'default' })
       case 'account':
-        return AddPropsWrapper(AccountField, { mode: mode || 'default' })
+        return AddPropsHOC(AccountField, { mode: mode || 'default' })
       case 'single-select':
-        return AddPropsWrapper(SingleSelectField, { mode: mode || 'default' })
+        return AddPropsHOC(SingleSelectField, { mode: mode || 'default' })
       case 'textarea':
-        return AddPropsWrapper(TextareaField, { mode: mode || 'default' })
+        return AddPropsHOC(TextareaField, { mode: mode || 'default' })
       default:
-        return AddPropsWrapper(TextField, { mode: mode || 'default' })
+        return AddPropsHOC(TextField, { mode: mode || 'default' })
     }
   }, [type, mode])
 }

@@ -2,32 +2,53 @@ import { faker } from '@faker-js/faker'
 import { base } from '../../api/config.js'
 // import { httpError, STATUS_CODES } from '../const.js'
 
+function randomRange(min, max) {
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
 export function genHttpMethods() {
   const historyUrl = `${base}/api/v1/history-message`
 
   // methods
   // get user profile
-  this.get(historyUrl, (schema, request) => {
-    const { messageId, size = 100 } = request.params
+  let fetchCount = 0
+  this.get(
+    historyUrl,
+    (schema, request) => {
+      const { messageId, size = 100 } = request.queryParams
 
-    const historyList = []
+      const historyList = []
+      let now = Date.now()
+      const interval = 1000 * 60 * 17
+      const largeInterval = 1000 * 60 * 60 * 24
 
-    for (let i = 0; i < size; i++) {
-      let obj = {}
-      const randomNum = Math.round(Math.random())
+      for (let i = 1; i <= size; i++) {
+        let obj = {}
+        const randomNum = Math.round(Math.random())
+        const timeNoise = Math.round(Math.random() * 15000)
 
-      let people = ['viola', 'ellen']
-      obj['message_id'] = faker.string.uuid()
-      obj['sent_to_id'] = people[randomNum]
-      obj['sent_from_id'] = people[randomNum === 1 ? 0 : 1]
-      obj['content'] = faker.lorem.paragraph({ min: 1, max: 3 })
-      obj['timestamp'] = faker.date.between({
-        from: '2023-08-01T00:00:00.000Z',
-        to: '2023-08-23T00:00:00.000Z',
-      })
-      historyList.push(obj)
-    }
+        let people = ['viola', 'ellen']
+        obj['message_id'] = faker.string.uuid()
+        obj['sent_to_id'] = people[randomNum]
+        obj['sent_from_id'] = people[randomNum === 1 ? 0 : 1]
+        obj['content'] = `${fetchCount + 1}-${i}: ${faker.lorem.paragraph({
+          min: 1,
+          max: 3,
+        })}`
+        obj['timestamp'] = new Date(
+          now - largeInterval * fetchCount + interval * i + timeNoise
+        ).toISOString()
 
-    return historyList
-  })
+        historyList.push(obj)
+      }
+
+      fetchCount += 1
+
+      return {
+        hasPrev: fetchCount < 5,
+        histories: historyList,
+      }
+    },
+    { timing: randomRange(0, 1500) }
+  )
 }

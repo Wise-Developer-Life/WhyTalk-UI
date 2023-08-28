@@ -1,9 +1,32 @@
 %comment-shared {
   min-height: 36px;
   width: 100%;
-  padding: 8px 0;
+  padding: 3px 0 12px 0;
   display: flex;
   align-items: center;
+}
+
+%timestamp-shared {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin: 0 30px;
+}
+
+.comment-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.timestamp-other {
+  @extend %timestamp-shared;
+  justify-content: flex-start;
+}
+
+.timestamp-me {
+  @extend %timestamp-shared;
+  justify-content: flex-end;
 }
 
 .comment-other {
@@ -16,8 +39,6 @@
 .comment-me {
   // float prop will conflict with virtuoso
   @extend %comment-shared;
-  //float: right;
-  //text-align: right;
   justify-content: flex-end;
 }
 
@@ -72,4 +93,14 @@
   border-right: 15px solid transparent;
   border-bottom: 15px solid transparent;
   border-left: 15px solid var(--color-2);
+}
+
+.loading-container {
+  //border: 1px dashed white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
 }

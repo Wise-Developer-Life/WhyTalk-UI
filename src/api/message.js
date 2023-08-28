@@ -9,6 +9,7 @@ export const getHistoryMessages = ({ queries = {} }) => {
   for (const [key, value] of Object.entries(queries)) {
     urlObj.searchParams.set(key, value)
   }
+
   return fetch(urlObj, {
     headers: { Authorization: `Bearer ${token}` },
   })

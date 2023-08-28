@@ -1,6 +1,6 @@
 import { Text } from '@tonic-ui/react'
 import styles from './styles.module.scss'
-const JumpbarLoading = () => {
+const GradientCircleLoading = () => {
   return (
     <div className={styles.ring}>
       <Text size="sm">Loading...</Text>
@@ -8,4 +8,4 @@ const JumpbarLoading = () => {
   )
 }
 
-export default JumpbarLoading
+export default GradientCircleLoading

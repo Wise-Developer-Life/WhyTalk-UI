@@ -14,7 +14,7 @@ const LayoutWrapper = WrappedComponent => {
   }
 }
 
-const AddPropsWrapper = (WrappedComponent, addedProps = {}) => {
+const AddPropsHOC = (WrappedComponent, addedProps = {}) => {
   return class WrappingComponent extends React.Component {
     render() {
       return (
@@ -38,4 +38,4 @@ const MiddlewareHOC =
     )
   }
 
-export { LayoutWrapper, AddPropsWrapper, MiddlewareHOC }
+export { LayoutWrapper, AddPropsHOC, MiddlewareHOC }
