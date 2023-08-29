@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import classNames from 'classnames'
 import { Virtuoso } from 'react-virtuoso'
-import dayjs from 'dayjs'
 import styles from '../App.module.scss'
-import historyStyles from './ChatMessage.module.scss'
 import { DATA_STATE } from '../../../reducers/index.js'
 import { handleHistoryRequest } from './utils.js'
 import { getHistoryMessages } from '../../../api/message.js'
 import { AddPropsHOC } from '../../../components/HOC/index.jsx'
 import HeaderLoader from './HeaderLoader.jsx'
+import MessageItem from './MessageItem.jsx'
 
 const messageSize = 50
 
@@ -94,38 +92,18 @@ const ChatMessage = () => {
   }, [viewFromAnchorRef.current])
 
   console.log('-messages-', messages)
+
   return (
     <Virtuoso
       className={styles['message-container']}
       ref={virtuoso}
       data={messages.value}
-      itemContent={(idx, history) => {
-        let me = 'viola'
-        let isMe = history['sent_from_id'] === me
-        const formattedTime = dayjs(history.timestamp).format('MM/DD HH:mm')
-
+      itemContent={(idx, historyMsg) => {
         return (
-          <div
-            key={history?.['message_id'] || `msg-${idx}`}
-            className={historyStyles['comment-container']}
-          >
-            <div
-              className={classNames({
-                [historyStyles['timestamp-me']]: isMe,
-                [historyStyles['timestamp-other']]: !isMe,
-              })}
-            >
-              {formattedTime}
-            </div>
-            <div
-              className={classNames({
-                [historyStyles['comment-me']]: isMe,
-                [historyStyles['comment-other']]: !isMe,
-              })}
-            >
-              <div className={historyStyles.bubble}>{`${history.content}`}</div>
-            </div>
-          </div>
+          <MessageItem
+            key={historyMsg?.['message_id'] || `msg-${idx}`}
+            message={historyMsg}
+          />
         )
       }}
       components={{
