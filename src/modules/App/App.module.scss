@@ -1,5 +1,6 @@
 @use '../../global' as global;
 
+
 .login-page-container {
   @include global.page-flex-container(
     $flex-direction: column,
@@ -13,7 +14,7 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 80px 300px auto;
-  grid-template-rows: 60px auto 65px;
+  grid-template-rows: 60px auto minmax(65px, max-content);
   grid-template-areas:
     'header header header'
     'nav main dialog'
@@ -57,5 +58,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  //padding: 0.5em 2em;
+  box-sizing: border-box;
+}
+
+.grid-item-footer {
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .landing-page-container {
+    //background-color: cornflowerblue;
+    grid-template-columns: 80px auto;
+    grid-template-rows: 60px auto minmax(65px, max-content) 50px;
+    grid-template-areas:
+    'header header'
+    'nav dialog'
+    'nav message-input'
+    'footer footer';
+  }
+
+  .grid-item-main {
+    display: none;
+  }
+
+  .grid-item-footer {
+    grid-area: footer;
+    border: 1px dashed;
+    display: block;
+    overflow: hidden;
+  }
 }

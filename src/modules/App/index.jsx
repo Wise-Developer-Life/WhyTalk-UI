@@ -5,9 +5,12 @@ import './App.module.scss'
 import styles from './App.module.scss'
 import ChatMessage from '../App/ChatMessage/index'
 import Profile from '../../components/Profile/index.jsx'
-import MessageFooter from './MessageFooter/index.jsx'
+import MessageInput from './MessageInput'
+import MessageFooter from "./MessageFooter/index.jsx";
 
 function App() {
+
+
   return (
     <section className={styles['landing-page-container']}>
       <div className={styles['grid-item-header']}>
@@ -19,6 +22,9 @@ function App() {
         <ChatMessage />
       </div>
       <div className={styles['grid-item-input']}>
+        <MessageInput />
+      </div>
+      <div className={styles['grid-item-footer']}>
         <MessageFooter />
       </div>
     </section>
