@@ -8,11 +8,22 @@ import Profile from '../../components/Profile/index.jsx'
 import MessageInput from './MessageInput'
 import MessageFooter from './MessageFooter/index.jsx'
 import ChatList from "./ChatList/index.jsx";
+import ChatHeader from "./ChatHeader/index.jsx";
+
+// todo: extract to api server
+const fakeLocalOther = {
+  name: 'Tiny boy Lee',
+  src: 'public/assets/lee.jpeg',
+  content: "lee boy",
+}
+
 
 function App() {
   return (
     <section className={styles['landing-page-container']}>
-      <div className={styles['grid-item-header']}>header</div>
+      <div className={styles['grid-item-header']}>
+        <ChatHeader user={fakeLocalOther} />
+      </div>
       <div className={styles['grid-item-nav']}>
         <div>upper nav</div>
         <Profile />

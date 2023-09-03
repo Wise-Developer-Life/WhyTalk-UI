@@ -1,6 +1,7 @@
 import styles from './ChatList.module.scss'
 import ListItem from "./ListItem.jsx";
 
+// todo: extract to api server
 const fakeData = [
   {
     name: 'Jago',
