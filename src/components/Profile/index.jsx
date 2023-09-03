@@ -12,8 +12,8 @@ import useFetchUserProfile from '../../api/hooks/useFetchUserProfile.jsx'
 import useLogout from '../../hooks/useLogout.jsx'
 import { DATA_STATE } from '../../reducers/index.js'
 import { LOGIN_STATE } from '../../contexts/const.js'
-import styles from './styles.module.scss'
 import LoadingOverlay from '../LoadingOverlay/index.jsx'
+import styles from './styles.module.scss'
 
 const Profile = () => {
   const { loginState } = useGlobalDataContext()

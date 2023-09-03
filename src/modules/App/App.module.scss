@@ -1,6 +1,5 @@
 @use '../../global' as global;
 
-
 .login-page-container {
   @include global.page-flex-container(
     $flex-direction: column,
@@ -14,11 +13,11 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 80px 300px auto;
-  grid-template-rows: 60px auto minmax(65px, max-content);
+  grid-template-rows: 75px auto minmax(65px, max-content);
   grid-template-areas:
-    'header header header'
-    'nav main dialog'
-    'nav main message-input';
+    'nav listHeader header'
+    'nav listBody dialog'
+    'nav listBody message-input';
 }
 
 .grid-item-header {
@@ -26,16 +25,26 @@
   border: 1px dashed;
   height: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  //flex-direction: row-reverse;
 }
 
 .grid-item-nav {
   grid-area: nav;
   border: 1px dashed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+}
+
+.grid-item-main-header {
+  grid-area: listHeader;
+  border: 1px dashed;
 }
 
 .grid-item-main {
-  grid-area: main;
+  grid-area: listBody;
   border: 1px dashed;
 }
 
@@ -43,6 +52,7 @@
   grid-area: dialog;
   border: 1px dashed;
   overflow: hidden;
+  position: relative;
 
   .message-container {
     height: 100%; /* 限制滚动区域的高度 */
@@ -66,21 +76,24 @@
 }
 
 @media (max-width: 950px) {
+  // under 950 px will activate
   .landing-page-container {
     //background-color: cornflowerblue;
     grid-template-columns: 80px auto;
     grid-template-rows: 60px auto minmax(65px, max-content) 50px;
     grid-template-areas:
-    'header header'
-    'nav dialog'
-    'nav message-input'
-    'footer footer';
+      'nav header'
+      'nav dialog'
+      'nav message-input'
+      'footer footer';
   }
 
+  .grid-item-main-header {
+    display: none;
+  }
   .grid-item-main {
     display: none;
   }
-
   .grid-item-footer {
     grid-area: footer;
     border: 1px dashed;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 import { Virtuoso } from 'react-virtuoso'
 import styles from '../App.module.scss'
 import { DATA_STATE } from '../../../reducers/index.js'
@@ -7,6 +7,7 @@ import { getHistoryMessages } from '../../../api/message.js'
 import { AddPropsHOC } from '../../../components/HOC/index.jsx'
 import HeaderLoader from './HeaderLoader.jsx'
 import MessageItem from './MessageItem.jsx'
+import FloatingButton from './FloatingButton.jsx'
 
 const messageSize = 50
 
@@ -18,6 +19,14 @@ const initMessageValue = {
 
 const ChatMessage = () => {
   const [messages, setMessages] = useState(initMessageValue)
+  const [visibleRange, setVisibleRange] = useState({
+    startIndex: 0,
+    endIndex: 0,
+  })
+
+  const floatIsShown =
+    visibleRange.endIndex <
+    messages.value.length - 1 - (visibleRange.endIndex - visibleRange.startIndex)
 
   // refs
   const virtuoso = useRef(null)
@@ -58,6 +67,15 @@ const ChatMessage = () => {
     }
   }
 
+  const scrollToBottom = useCallback(() => {
+    console.log('-call scrollToBottom', virtuoso)
+    virtuoso.current.scrollToIndex({
+      index: messages.value.length - 1,
+      align: 'end',
+      behavior: 'auto',
+    })
+  }, [messages.value.length])
+
   useEffect(() => {
     // init render to get history
     if (renderCountRef.current === 0) {
@@ -91,31 +109,39 @@ const ChatMessage = () => {
     }
   }, [viewFromAnchorRef.current])
 
-  console.log('-messages-', messages)
+  // console.log('-messages-', messages, virtuoso)
+  // console.log('-render-', visibleRange, messages.value.length - 1 - (visibleRange.endIndex - visibleRange.startIndex))
 
   return (
-    <Virtuoso
-      className={styles['message-container']}
-      ref={virtuoso}
-      data={messages.value}
-      itemContent={(idx, historyMsg) => {
-        return (
-          <MessageItem
-            key={historyMsg?.['message_id'] || `msg-${idx}`}
-            message={historyMsg}
-          />
-        )
-      }}
-      components={{
-        Header: messages.hasPrev
-          ? AddPropsHOC(HeaderLoader, {
-              fetchCallback: handleFetchMessages,
-              dirtyRef: headerLoadingDirtyRef,
-              // containerRef: virtuoso,
-            })
-          : () => <></>,
-      }}
-    />
+    <>
+      <Virtuoso
+        className={styles['message-container']}
+        ref={virtuoso}
+        data={messages.value}
+        rangeChanged={setVisibleRange}
+        itemContent={(idx, historyMsg) => {
+          return (
+            <MessageItem
+              key={historyMsg?.['message_id'] || `msg-${idx}`}
+              message={historyMsg}
+            />
+          )
+        }}
+        components={{
+          Header: messages.hasPrev
+            ? AddPropsHOC(HeaderLoader, {
+                fetchCallback: handleFetchMessages,
+                dirtyRef: headerLoadingDirtyRef,
+                // containerRef: virtuoso,
+              })
+            : () => <></>,
+        }}
+      />
+      <FloatingButton
+        isShown={floatIsShown}
+        callback={scrollToBottom}
+      />
+    </>
   )
 }
 

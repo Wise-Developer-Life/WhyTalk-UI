@@ -1,0 +1,61 @@
+%item-base {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  padding-left: 12px;
+}
+
+#chat-list-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.list-item {
+  width: 100%;
+  height: 72px;
+  //border: 1px dashed grey;
+  padding: 8px 24px;
+  display: grid;
+  grid-template-columns: 56px calc(100% - 56px);
+  grid-template-rows: 28px auto;
+  grid-template-areas:
+    "img name"
+    "img content";
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+
+  .item-name {
+    @extend %item-base;
+    grid-area: name;
+    font-size: 15px;
+    font-weight: 500;
+    justify-content: flex-end;
+  }
+  .item-content {
+    @extend %item-base;
+    grid-area: content;
+    font-size: 13px;
+    .overflow-ellipsis {
+      white-space: nowrap;      /* 防止文本换行 */
+      overflow: hidden;         /* 隐藏超出容器的内容 */
+      text-overflow: ellipsis;  /* 显示省略号 */
+      max-width: 100%;          /* 可以根据需要设置最大宽度 */
+    }
+  }
+
+  &:hover {
+    background-color: #dc444670;
+    cursor: pointer;
+  }
+}
