@@ -1,48 +1,6 @@
 .message-footer-container {
+  width: 100%;
   height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5em 2em;
-}
-
-.message-container {
-  --color-2: #33333470;
-  width: 100%;
-  height: auto;
-  background-color: var(--color-2);
   box-sizing: border-box;
-  border-radius: 10px;
   display: flex;
-
-}
-.message-input {
-  flex: 1 1 50px;
-  //border-radius: 25px;
-  //border: 2px solid #949494;
-  background-color: transparent;
-  padding: 10px 15px;
-  border: 0;
-  outline: none;
-  resize: none;
-  &:focus {
-    border-bottom: 1px ridge rgba(211, 220, 50, .8);
-    border-radius: 5px;
-  }
-}
-
-.icon-container {
-  flex: 0 0 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-}
-
-.icon-send {
-  &:hover {
-    cursor: pointer;
-    fill: #578aef90;
-  }
 }

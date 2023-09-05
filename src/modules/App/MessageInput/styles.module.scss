@@ -1,0 +1,48 @@
+.message-input-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8em 2em;
+}
+
+.message-container {
+  --color-2: #33333470;
+  width: 100%;
+  height: auto;
+  background-color: var(--color-2);
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+}
+.message-input {
+  flex: 1 1 50px;
+  //border-radius: 25px;
+  //border: 2px solid #949494;
+  background-color: transparent;
+  padding: 10px 15px;
+  border: 1px ridge transparent;
+  outline: none;
+  resize: none;
+  line-height: 20px;
+  &:focus {
+    border-bottom: 1px ridge rgba(211, 220, 50, 0.8);
+    border-radius: 5px;
+  }
+}
+
+.icon-container {
+  flex: 0 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.icon-send {
+  &:hover {
+    cursor: pointer;
+    fill: #578aef90;
+  }
+}

@@ -17,23 +17,57 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  //border: 1px dashed black;
 }
 
-.timestamp-other {
-  @extend %timestamp-shared;
-  justify-content: flex-start;
+.comment-other-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50px calc(100% - 50px);
+  grid-template-rows: 20px auto;
+  //grid-template-areas:
+  //  "img timestamp"
+  //  "img msg";
+
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+
+  .img-container {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    //background-color: #ade8f4;
+  }
+
+  .timestamp-other {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    @extend %timestamp-shared;
+    justify-content: flex-start;
+  }
+
+  .comment-other {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    @extend %comment-shared;
+    justify-content: flex-start;
+  }
 }
 
 .timestamp-me {
   @extend %timestamp-shared;
   justify-content: flex-end;
-}
-
-.comment-other {
-  @extend %comment-shared;
-  //float: left;
-  //text-align: left;
-  justify-content: flex-start;
 }
 
 .comment-me {
@@ -58,6 +92,7 @@
   --color-1: rgba(146, 13, 23, 0.3);
   background-color: var(--color-1);
   border-top-left-radius: 0;
+  margin: 0 10px;
 }
 
 .comment-me .bubble {
@@ -103,4 +138,22 @@
   align-items: center;
   gap: 10px;
   padding: 6px 0;
+}
+
+.floating-btn-container {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 0 1em;
+  &:hover {
+    cursor: pointer;
+  }
 }
