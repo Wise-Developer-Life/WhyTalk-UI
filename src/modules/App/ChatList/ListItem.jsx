@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 import styles from './ChatList.module.scss'
 
 const ListItem = props => {
@@ -6,7 +6,10 @@ const ListItem = props => {
 
   return (
     <div className={styles['list-item']}>
-      <img src={info.src} alt={info.name} />
+      <img
+        src={info.src}
+        alt={info.name}
+      />
       <div className={styles['item-name']}>{info.name}</div>
       <div className={styles['item-content']}>
         <div className={styles['overflow-ellipsis']}>{info.content}</div>

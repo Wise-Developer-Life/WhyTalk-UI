@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 import styles from './ChatHeader.module.scss'
 
 const ChatHeader = props => {
@@ -7,7 +7,10 @@ const ChatHeader = props => {
 
   return (
     <div id={styles['chat-header']}>
-      <img src={src} alt={name} />
+      <img
+        src={src}
+        alt={name}
+      />
       <div>{name}</div>
     </div>
   )
@@ -18,7 +21,7 @@ ChatHeader.propTypes = {
 }
 
 ChatHeader.defaultProps = {
-  user: {}
+  user: {},
 }
 
 export default ChatHeader

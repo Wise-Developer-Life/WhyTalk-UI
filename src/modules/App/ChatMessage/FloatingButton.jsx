@@ -11,7 +11,7 @@ const FloatingButton = memo(props => {
       className={styles['floating-btn-container']}
       onClick={callback}
     >
-      <Icon icon="arrow-down"/>
+      <Icon icon="arrow-down" />
     </div>
   ) : (
     <></>

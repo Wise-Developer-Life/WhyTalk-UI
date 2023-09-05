@@ -1,5 +1,5 @@
 import styles from './ChatList.module.scss'
-import ListItem from "./ListItem.jsx";
+import ListItem from './ListItem.jsx'
 
 // todo: extract to api server
 const fakeData = [
@@ -14,10 +14,10 @@ const fakeData = [
     content: "I'm hole m, you motherfucker holy guy",
   },
   {
-    name: 'Tiny boy Lee',
+    name: 'Lee small boy',
     src: 'public/assets/lee.jpeg',
-    content: "lee boy",
-  }
+    content: 'niganma',
+  },
 ]
 
 const ChatList = () => {
@@ -34,6 +34,5 @@ const ChatList = () => {
     </div>
   )
 }
-
 
 export default ChatList

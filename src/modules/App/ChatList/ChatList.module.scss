@@ -26,8 +26,8 @@
   grid-template-columns: 56px calc(100% - 56px);
   grid-template-rows: 28px auto;
   grid-template-areas:
-    "img name"
-    "img content";
+    'img name'
+    'img content';
 
   img {
     width: 56px;
@@ -47,10 +47,10 @@
     grid-area: content;
     font-size: 13px;
     .overflow-ellipsis {
-      white-space: nowrap;      /* 防止文本换行 */
-      overflow: hidden;         /* 隐藏超出容器的内容 */
-      text-overflow: ellipsis;  /* 显示省略号 */
-      max-width: 100%;          /* 可以根据需要设置最大宽度 */
+      white-space: nowrap; /* 防止文本换行 */
+      overflow: hidden; /* 隐藏超出容器的内容 */
+      text-overflow: ellipsis; /* 显示省略号 */
+      max-width: 100%; /* 可以根据需要设置最大宽度 */
     }
   }
 

@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Virtuoso } from 'react-virtuoso'
 import styles from '../App.module.scss'
 import { DATA_STATE } from '../../../reducers/index.js'
@@ -26,7 +26,9 @@ const ChatMessage = () => {
 
   const floatIsShown =
     visibleRange.endIndex <
-    messages.value.length - 1 - (visibleRange.endIndex - visibleRange.startIndex)
+    messages.value.length -
+      1 -
+      (visibleRange.endIndex - visibleRange.startIndex)
 
   // refs
   const virtuoso = useRef(null)
@@ -120,10 +122,16 @@ const ChatMessage = () => {
         data={messages.value}
         rangeChanged={setVisibleRange}
         itemContent={(idx, historyMsg) => {
+
+          const nextIsSame =
+            historyMsg['sent_from_id'] ===
+            messages.value[idx + 1]?.['sent_from_id']
+
           return (
             <MessageItem
               key={historyMsg?.['message_id'] || `msg-${idx}`}
               message={historyMsg}
+              nextIsSame={nextIsSame}
             />
           )
         }}

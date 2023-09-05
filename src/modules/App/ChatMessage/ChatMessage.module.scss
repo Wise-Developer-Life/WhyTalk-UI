@@ -20,33 +20,54 @@
   //border: 1px dashed black;
 }
 
-//.comment-other-container {
-//  width: 100%;
-//  display: grid;
-//  grid-template-columns: 50px calc(100% - 50px);
-//  grid-template-rows: 20px auto;
-//  grid-template-areas:
-//    "img timestamp"
-//    "img msg";
-//}
+.comment-other-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50px calc(100% - 50px);
+  grid-template-rows: 20px auto;
+  //grid-template-areas:
+  //  "img timestamp"
+  //  "img msg";
 
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
 
+  .img-container {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    //background-color: #ade8f4;
+  }
 
+  .timestamp-other {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    @extend %timestamp-shared;
+    justify-content: flex-start;
+  }
 
-.timestamp-other {
-  @extend %timestamp-shared;
-  justify-content: flex-start;
+  .comment-other {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    @extend %comment-shared;
+    justify-content: flex-start;
+  }
 }
 
 .timestamp-me {
   @extend %timestamp-shared;
   justify-content: flex-end;
-}
-
-.comment-other {
-  @extend %comment-shared;
-  justify-content: flex-start;
-  //background-color: #ade8f4;
 }
 
 .comment-me {
@@ -71,6 +92,7 @@
   --color-1: rgba(146, 13, 23, 0.3);
   background-color: var(--color-1);
   border-top-left-radius: 0;
+  margin: 0 10px;
 }
 
 .comment-me .bubble {
