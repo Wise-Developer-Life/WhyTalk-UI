@@ -9,6 +9,7 @@ import MessageInput from './MessageInput'
 import MessageFooter from './MessageFooter/index.jsx'
 import ChatList from './ChatList/index.jsx'
 import ChatHeader from './ChatHeader/index.jsx'
+import useWindowSize from "../../hooks/useWindowSize.jsx";
 
 // todo: extract to api server
 const fakeLocalOther = {
@@ -18,6 +19,10 @@ const fakeLocalOther = {
 }
 
 function App() {
+  const { width } = useWindowSize()
+
+  // console.log('--',height, width)
+
   return (
     <section className={styles['landing-page-container']}>
       <div className={styles['grid-item-header']}>
@@ -40,7 +45,7 @@ function App() {
             fontSize: '20px',
           }}
         >
-          Chats
+          {width > 800 && 'Chats'}
         </div>
       </div>
       <div className={styles['grid-item-main']}>

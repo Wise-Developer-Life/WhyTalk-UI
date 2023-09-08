@@ -25,7 +25,6 @@
   border: 1px dashed;
   height: 100%;
   display: flex;
-  //flex-direction: row-reverse;
 }
 
 .grid-item-nav {
@@ -75,23 +74,20 @@
   display: none;
 }
 
-@media (max-width: 950px) {
-  // under 950 px will activate
+@media (400px <= width <=800px) {
+  //same syntax: @media (min-width: 400px) and (max-width: 800px)
   .landing-page-container {
     //background-color: cornflowerblue;
     grid-template-columns: 80px auto;
     grid-template-rows: 60px auto minmax(65px, max-content) 50px;
     grid-template-areas:
-      'nav header'
-      'nav dialog'
-      'nav message-input'
+      'listHeader header'
+      'listBody dialog'
+      'listBody message-input'
       'footer footer';
   }
 
-  .grid-item-main-header {
-    display: none;
-  }
-  .grid-item-main {
+  .grid-item-nav {
     display: none;
   }
   .grid-item-footer {
@@ -99,5 +95,27 @@
     border: 1px dashed;
     display: block;
     overflow: hidden;
+  }
+}
+
+@media (width < 400px) {
+  .landing-page-container {
+    grid-template-columns: auto;
+    grid-template-rows: 60px auto minmax(65px, max-content) 50px;
+    grid-template-areas:
+      'header'
+      'dialog'
+      'message-input'
+      'footer';
+  }
+
+  .grid-item-nav {
+    display: none;
+  }
+  .grid-item-main-header {
+    display: none;
+  }
+  .grid-item-main {
+    display: none;
   }
 }

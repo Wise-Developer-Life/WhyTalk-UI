@@ -59,3 +59,22 @@
     cursor: pointer;
   }
 }
+
+@media (width < 800px) {
+  .list-item {
+    width: 100%;
+    height: 72px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .list-item .item-name {
+    display: none;
+  }
+  .list-item .item-content {
+    display: none;
+  }
+}

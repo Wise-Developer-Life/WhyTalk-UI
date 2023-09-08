@@ -92,7 +92,6 @@ const MessageInput = () => {
     // }
   }, [])
 
-  console.log('-textValue--', textValue)
 
   return (
     <section className={styles['message-input-container']}>
