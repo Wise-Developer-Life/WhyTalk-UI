@@ -49,6 +49,6 @@ export function genHttpMethods() {
         histories: historyList,
       }
     },
-    { timing: randomRange(10, 1500) }
+    { timing: randomRange(500, 1500) }
   )
 }

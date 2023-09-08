@@ -8,27 +8,17 @@ import { AddPropsHOC } from '../../../components/HOC/index.jsx'
 import HeaderLoader from './HeaderLoader.jsx'
 import MessageItem from './MessageItem.jsx'
 import FloatingButton from './FloatingButton.jsx'
+import { initMessageValue, messageSize } from './const.js'
 
-const messageSize = 50
-
-const initMessageValue = {
-  state: DATA_STATE.init,
-  hasPrev: false,
-  value: [],
-}
+/*
+ * issue: need to fix floating button,
+ * it cause the unexpected rerender when move to the top margin
+ *
+ * */
 
 const ChatMessage = () => {
   const [messages, setMessages] = useState(initMessageValue)
-  const [visibleRange, setVisibleRange] = useState({
-    startIndex: 0,
-    endIndex: 0,
-  })
-
-  const floatIsShown =
-    visibleRange.endIndex <
-    messages.value.length -
-      1 -
-      (visibleRange.endIndex - visibleRange.startIndex)
+  const [floatIsShown, setFloatIsShown] = useState(false)
 
   // refs
   const virtuoso = useRef(null)
@@ -37,6 +27,9 @@ const ChatMessage = () => {
   const historyCachedRef = useRef([])
   const headerLoadingDirtyRef = useRef(false)
   const renderCountRef = useRef(0)
+  const virtuosoScroller = document.querySelector(
+    '[data-test-id="virtuoso-scroller"]'
+  )
 
   // callbacks
   const handleFetchMessages = async () => {
@@ -87,7 +80,7 @@ const ChatMessage = () => {
   }, [])
 
   useEffect(() => {
-    // scroll to bottom when init render
+    // show at bottom when init render
     if (messages.state === DATA_STATE.ready && !historyAnchorRef.current) {
       const historyList = messages.value
 
@@ -102,16 +95,16 @@ const ChatMessage = () => {
 
   useEffect(() => {
     // update view anchor when scrolling upward
+    // todo: refer to doc prepend items
     if (viewFromAnchorRef.current !== 'init') {
       virtuoso.current.scrollToIndex({
-        index: messageSize,
+        index: messageSize - 1,
         align: 'start',
         behavior: 'auto',
       })
     }
   }, [viewFromAnchorRef.current])
 
-  // console.log('-messages-', messages, virtuoso)
   // console.log('-render-', visibleRange, messages.value.length - 1 - (visibleRange.endIndex - visibleRange.startIndex))
 
   return (
@@ -120,8 +113,35 @@ const ChatMessage = () => {
         className={styles['message-container']}
         ref={virtuoso}
         data={messages.value}
-        rangeChanged={setVisibleRange}
         itemContent={(idx, historyMsg) => {
+
+          // get to know when to show float button
+          if (virtuosoScroller) {
+            const bottomSpaceLeftToScroll =
+              virtuosoScroller?.scrollHeight -
+              virtuosoScroller?.scrollTop -
+              virtuosoScroller?.clientHeight
+            const scrollerClientHeight = virtuosoScroller?.clientHeight
+            if (
+              bottomSpaceLeftToScroll > scrollerClientHeight &&
+              floatIsShown === false
+            ) {
+              setFloatIsShown(true)
+            } else if (
+              bottomSpaceLeftToScroll <= scrollerClientHeight &&
+              floatIsShown === true
+            ) {
+              setFloatIsShown(false)
+            }
+          }
+
+          // console.log(
+          //   '-element--',
+          //   virtuosoScroller?.clientHeight,
+          //   virtuosoScroller?.scrollHeight -
+          //     virtuosoScroller?.scrollTop -
+          //     virtuosoScroller?.clientHeight
+          // )
 
           const nextIsSame =
             historyMsg['sent_from_id'] ===
@@ -140,7 +160,6 @@ const ChatMessage = () => {
             ? AddPropsHOC(HeaderLoader, {
                 fetchCallback: handleFetchMessages,
                 dirtyRef: headerLoadingDirtyRef,
-                // containerRef: virtuoso,
               })
             : () => <></>,
         }}

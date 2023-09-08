@@ -22,7 +22,7 @@ const MessageItem = props => {
         [styles['comment-other-container']]: !isMe,
       })}
     >
-      {(!isMe && !nextIsSame) && (
+      {!isMe && !nextIsSame && (
         <div className={styles['img-container']}>
           <img
             src={otherSrc}
@@ -53,7 +53,7 @@ const MessageItem = props => {
 MessageItem.propTypes = {
   userinfo: PropTypes.object,
   message: PropTypes.object,
-  nextIsSame: PropTypes.bool
+  nextIsSame: PropTypes.bool,
 }
 
 MessageItem.defaultProps = {
