@@ -7,3 +7,8 @@ export const initMessageValue = {
   hasPrev: false,
   value: [],
 }
+
+export const connectionStatus = {
+  CONNECTED: 'connected',
+  DISCONNECTED: 'DISCONNECTED',
+}

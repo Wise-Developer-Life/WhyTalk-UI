@@ -8,7 +8,8 @@ import { AddPropsHOC } from '../../../components/HOC/index.jsx'
 import HeaderLoader from './HeaderLoader.jsx'
 import MessageItem from './MessageItem.jsx'
 import FloatingButton from './FloatingButton.jsx'
-import { initMessageValue, messageSize } from './const.js'
+import { connectionStatus, initMessageValue, messageSize } from './const.js'
+import { useSocketIoContext } from '../../../contexts/contextStores.js'
 
 /*
  * issue: need to fix floating button,
@@ -19,6 +20,9 @@ import { initMessageValue, messageSize } from './const.js'
 const ChatMessage = () => {
   const [messages, setMessages] = useState(initMessageValue)
   const [floatIsShown, setFloatIsShown] = useState(false)
+
+  // hooks
+  const { latestMessage, socketState } = useSocketIoContext()
 
   // refs
   const virtuoso = useRef(null)
@@ -71,16 +75,16 @@ const ChatMessage = () => {
     })
   }, [messages.value.length])
 
+  // init render to get history
   useEffect(() => {
-    // init render to get history
     if (renderCountRef.current === 0) {
       renderCountRef.current += 1
       handleFetchMessages()
     }
   }, [])
 
+  // show at bottom when init render
   useEffect(() => {
-    // show at bottom when init render
     if (messages.state === DATA_STATE.ready && !historyAnchorRef.current) {
       const historyList = messages.value
 
@@ -93,8 +97,8 @@ const ChatMessage = () => {
     }
   }, [messages.state])
 
+  // update view anchor when scrolling upward
   useEffect(() => {
-    // update view anchor when scrolling upward
     // todo: refer to doc prepend items
     if (viewFromAnchorRef.current !== 'init') {
       virtuoso.current.scrollToIndex({
@@ -105,7 +109,23 @@ const ChatMessage = () => {
     }
   }, [viewFromAnchorRef.current])
 
-  // console.log('-render-', visibleRange, messages.value.length - 1 - (visibleRange.endIndex - visibleRange.startIndex))
+  // handle socket res
+  useEffect(() => {
+    console.log('--socketState', latestMessage)
+
+    if (socketState === connectionStatus.CONNECTED) {
+      // update message
+      /*
+        { message_id, sent_to_id, sent_from_id, content, timestamp }
+      */
+      setMessages({
+        ...messages,
+        value: [...messages.value, latestMessage.value],
+      })
+    }
+  }, [latestMessage])
+
+  console.log('-render-', latestMessage)
 
   return (
     <>
@@ -113,8 +133,8 @@ const ChatMessage = () => {
         className={styles['message-container']}
         ref={virtuoso}
         data={messages.value}
+        followOutput={'smooth'}
         itemContent={(idx, historyMsg) => {
-
           // get to know when to show float button
           if (virtuosoScroller) {
             const bottomSpaceLeftToScroll =

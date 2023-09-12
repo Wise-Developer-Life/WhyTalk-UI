@@ -9,7 +9,9 @@ import MessageInput from './MessageInput'
 import MessageFooter from './MessageFooter/index.jsx'
 import ChatList from './ChatList/index.jsx'
 import ChatHeader from './ChatHeader/index.jsx'
-import useWindowSize from "../../hooks/useWindowSize.jsx";
+import useWindowSize from '../../hooks/useWindowSize.jsx'
+import SocketIoProvider from '../../contexts/providers/SocketIoProvider.jsx'
+import ChatListHeader from './ChatListHeader/index.jsx'
 
 // todo: extract to api server
 const fakeLocalOther = {
@@ -19,10 +21,7 @@ const fakeLocalOther = {
 }
 
 function App() {
-  const { width } = useWindowSize()
-
-  // console.log('--',height, width)
-
+  console.log('---app render')
   return (
     <section className={styles['landing-page-container']}>
       <div className={styles['grid-item-header']}>
@@ -33,30 +32,19 @@ function App() {
         <Profile />
       </div>
       <div className={styles['grid-item-main-header']}>
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            height: '100%',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            padding: '8px 24px',
-            fontWeight: '600',
-            fontSize: '20px',
-          }}
-        >
-          {width > 800 && 'Chats'}
-        </div>
+        <ChatListHeader />
       </div>
       <div className={styles['grid-item-main']}>
         <ChatList />
       </div>
-      <div className={styles['grid-item-dialog']}>
-        <ChatMessage />
-      </div>
-      <div className={styles['grid-item-input']}>
-        <MessageInput />
-      </div>
+      <SocketIoProvider>
+        <div className={styles['grid-item-dialog']}>
+          <ChatMessage />
+        </div>
+        <div className={styles['grid-item-input']}>
+          <MessageInput />
+        </div>
+      </SocketIoProvider>
       <div className={styles['grid-item-footer']}>
         <MessageFooter />
       </div>

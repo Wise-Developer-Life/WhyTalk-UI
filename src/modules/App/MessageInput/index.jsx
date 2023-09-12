@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Icon } from '@tonic-ui/react'
 import styles from './styles.module.scss'
+import { useSocketIoContext } from '../../../contexts/contextStores.js'
 
 const rowLimit = 5
 
@@ -8,8 +9,11 @@ const MessageInput = () => {
   // local state
   const [textValue, setTextValue] = useState('')
 
+  // hooks
+  const { sendMessage } = useSocketIoContext()
+
   const onChange = useCallback(event => {
-    console.log('---onChange')
+    // console.log('---onChange', event.target.value)
     if (event.target.value.length < 1000) {
       setTextValue(event.target.value)
     }
@@ -25,7 +29,7 @@ const MessageInput = () => {
         parseInt(computedStyleObj.lineHeight)
     )
 
-    console.log('--rowsNum-', rowsNum)
+    // console.log('--rowsNum-', rowsNum)
 
     if (rowsNum !== rowAttributeValue && rowsNum <= rowLimit) {
       textareaElem.setAttribute('rows', rowsNum)
@@ -33,10 +37,12 @@ const MessageInput = () => {
   }, [])
 
   const onSubmit = () => {
-    console.log('---call onSubmit--')
+    console.log('---call onSubmit--', textValue)
+    sendMessage(textValue)
+    setTextValue('')
   }
 
-  const onKeyDown = useCallback(event => {
+  const onKeyDown = event => {
     const key = event.key
 
     if (event.key === 'Enter') {
@@ -79,7 +85,7 @@ const MessageInput = () => {
         textareaElem.setAttribute('rows', lineNumber)
       }
     }
-  }, [])
+  }
 
   useEffect(() => {
     // mount event listener to textarea
@@ -91,7 +97,6 @@ const MessageInput = () => {
     //   if (textareaEle) textareaEle.removeEventListener('input', onChange)
     // }
   }, [])
-
 
   return (
     <section className={styles['message-input-container']}>
