@@ -45,7 +45,7 @@ const FormContainer = props => {
 
   const onPasswordStage = () => {
     const el = document.getElementById('login-card')
-    el.style.setProperty('--login-card-height', '400px')
+    el.style.setProperty('--login-card-height', '370px')
     setStage(2)
   }
 
@@ -121,7 +121,7 @@ const FormContainer = props => {
   return (
     <form
       style={{
-        marginBottom: '2em',
+        marginBottom: '1.8em',
       }}
       onSubmit={handleSubmit(onSubmit)}
     >

@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --login-card-height: 310px;
+    --login-card-height: 410px;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;

@@ -71,3 +71,36 @@
 .back-account:hover {
   text-decoration: underline;
 }
+
+#o-auth-divider {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1.3em 0;
+
+  .divider-txt {
+    flex: 0 0 auto;
+    margin: 0 0.5rem;
+    color: #757575;
+  }
+  .divider-line {
+    flex: 1 1 auto;
+    height: 0.0625rem;
+    background-color: #757575;
+  }
+}
+
+.google-login-btn {
+  @extend %fonts-setting;
+  @extend %btn-base;
+  background-color: transparent;
+  transition: 0.2s;
+  border: 0.0625rem solid #757575;
+  &:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 0.75;
+    cursor: pointer;
+  }
+}

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.2.0",
+    "@react-oauth/google": "^0.11.1",
     "@tonic-ui/react": "^1.23.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",

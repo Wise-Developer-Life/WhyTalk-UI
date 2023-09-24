@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import classNames from "classnames";
 import { Icon } from '@tonic-ui/react'
 import styles from './styles.module.scss'
 import { useSocketIoContext } from '../../../contexts/contextStores.js'
@@ -112,7 +113,10 @@ const MessageInput = () => {
         />
         <div className={styles['icon-container']}>
           <Icon
-            className={styles['icon-send']}
+            className={classNames({
+              [styles['icon-send']]: true,
+              [styles['send-disallowed']]: textValue === ''
+            })}
             onClick={onSubmit}
             icon="send"
             color="blue:50"

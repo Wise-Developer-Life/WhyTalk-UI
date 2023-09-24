@@ -60,7 +60,6 @@ const useWebSocket = props => {
     setWs(socketIo)
   }, [setWs, socketUrl])
 
-
   const sendMessage = useCallback(
     message => {
       ws.emit(SOCKET_EVENT.messageFromClient, message)

@@ -46,3 +46,8 @@
     fill: #578aef90;
   }
 }
+
+.icon-send.send-disallowed {
+  cursor: not-allowed;
+  fill: grey;
+}
