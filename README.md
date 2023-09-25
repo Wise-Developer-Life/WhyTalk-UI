@@ -23,6 +23,18 @@ Toy model of a dating app, featuring the following characteristics and functiona
 
   4. __Real-time Chat Matching System__ (_Backend in Progress_): The application includes a real-time chat matching system, which is currently under development.
 
+## Quick Start
+Install and run locally:
+
+```bash
+ $ yarn install
+ $ yarn dev
+```
+
+- open with [http://localhost:5173/?mock=true](http://localhost:5173/task-list?mock=true) with mock server (Mirage js).
+
+- note:
+    1. The query string `mock=true` is used to activate mock server.
 
 ## Memo
 ### Key techniques of frontend
