@@ -26,13 +26,13 @@ Toy model of a dating app, featuring the following characteristics and functiona
 ## Quick Start
 Install and run locally:
 
-```bash
+```zsh
  $ yarn install
  $ yarn dev
 ```
 
-- open with [http://localhost:5173/?mock=true](http://localhost:5173/task-list?mock=true) with mock server (Mirage js).
-
+- open [http://localhost:5173/?mock=true](http://localhost:5173/task-list?mock=true) with mock server (Mirage js).
+- test account/ password: `viola-chen/54775477`
 - note:
     1. The query string `mock=true` is used to activate mock server.
 
